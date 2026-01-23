@@ -18,15 +18,15 @@ public class TakingTurnsQueueTests
         var tim = new Person("Tim", 5);
         var sue = new Person("Sue", 3);
 
-        Person[] expectedResult = [bob, tim, sue, bob, tim, sue, tim, sue, tim, tim];
+        Person[] expectedResult = new Person[] { bob, tim, sue, bob, tim, sue, tim, sue, tim, tim };
 
-        var players = new TakingTurnsQueue();
-        players.AddPerson(bob.Name, bob.Turns);
-        players.AddPerson(tim.Name, tim.Turns);
-        players.AddPerson(sue.Name, sue.Turns);
+        var players = new TakingTurnsQueue<Person>();
+        players.AddPerson(bob, bob.Turns);
+        players.AddPerson(tim, tim.Turns);
+        players.AddPerson(sue, sue.Turns);
 
         int i = 0;
-        while (players.Length > 0)
+        while (players.Count > 0)
         {
             if (i >= expectedResult.Length)
             {
@@ -51,12 +51,12 @@ public class TakingTurnsQueueTests
         var sue = new Person("Sue", 3);
         var george = new Person("George", 3);
 
-        Person[] expectedResult = [bob, tim, sue, bob, tim, sue, tim, george, sue, tim, george, tim, george];
+        Person[] expectedResult = new Person[] { bob, tim, sue, bob, tim, sue, tim, george, sue, tim, george, tim, george };
 
-        var players = new TakingTurnsQueue();
-        players.AddPerson(bob.Name, bob.Turns);
-        players.AddPerson(tim.Name, tim.Turns);
-        players.AddPerson(sue.Name, sue.Turns);
+        var players = new TakingTurnsQueue<Person>();
+        players.AddPerson(bob, bob.Turns);
+        players.AddPerson(tim, tim.Turns);
+        players.AddPerson(sue, sue.Turns);
 
         int i = 0;
         for (; i < 5; i++)
@@ -65,9 +65,9 @@ public class TakingTurnsQueueTests
             Assert.AreEqual(expectedResult[i].Name, person.Name);
         }
 
-        players.AddPerson("George", 3);
+        players.AddPerson(george, george.Turns);
 
-        while (players.Length > 0)
+        while (players.Count > 0)
         {
             if (i >= expectedResult.Length)
             {
@@ -94,12 +94,12 @@ public class TakingTurnsQueueTests
         var tim = new Person("Tim", timTurns);
         var sue = new Person("Sue", 3);
 
-        Person[] expectedResult = [bob, tim, sue, bob, tim, sue, tim, sue, tim, tim];
+        Person[] expectedResult = new Person[] { bob, tim, sue, bob, tim, sue, tim, sue, tim, tim };
 
-        var players = new TakingTurnsQueue();
-        players.AddPerson(bob.Name, bob.Turns);
-        players.AddPerson(tim.Name, tim.Turns);
-        players.AddPerson(sue.Name, sue.Turns);
+        var players = new TakingTurnsQueue<Person>();
+        players.AddPerson(bob, bob.Turns);
+        players.AddPerson(tim, tim.Turns);
+        players.AddPerson(sue, sue.Turns);
 
         for (int i = 0; i < 10; i++)
         {
@@ -123,11 +123,11 @@ public class TakingTurnsQueueTests
         var tim = new Person("Tim", timTurns);
         var sue = new Person("Sue", 3);
 
-        Person[] expectedResult = [tim, sue, tim, sue, tim, sue, tim, tim, tim, tim];
+        Person[] expectedResult = new Person[] { tim, sue, tim, sue, tim, sue, tim, tim, tim, tim };
 
-        var players = new TakingTurnsQueue();
-        players.AddPerson(tim.Name, tim.Turns);
-        players.AddPerson(sue.Name, sue.Turns);
+        var players = new TakingTurnsQueue<Person>();
+        players.AddPerson(tim, tim.Turns);
+        players.AddPerson(sue, sue.Turns);
 
         for (int i = 0; i < 10; i++)
         {
@@ -146,7 +146,7 @@ public class TakingTurnsQueueTests
     // Defect(s) Found: 
     public void TestTakingTurnsQueue_Empty()
     {
-        var players = new TakingTurnsQueue();
+        var players = new TakingTurnsQueue<Person>();
 
         try
         {
