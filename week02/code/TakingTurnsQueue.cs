@@ -11,6 +11,14 @@ public class TakingTurnsQueue<T>
 {
     private Queue<(T person, int turns)> queue = new Queue<(T, int)>();
 
+    public int Count
+    {
+        get
+        {
+            return queue.Count; // Adjust based on your internal data structure
+        }
+    }
+
     public void AddPerson(T person, int turns)
     {
         queue.Enqueue((person, turns));
